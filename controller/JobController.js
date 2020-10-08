@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Job = require('../models/Job')
 const slug = require('slugify')
+const { route } = require('../../painel_B/articles/ArticlesController')
 
 router.get('/api',(req,res)=>{
     Job.findAll()
@@ -9,6 +10,15 @@ router.get('/api',(req,res)=>{
         res.json(apijobs)
     })
 
+})
+
+route.get('api/:id',(req,res)=>{
+    var id = req.params.id
+    if(isNaN(id)){
+        Job.findByPk(id)
+    }else{
+        res.send("id invalido")
+    }
 })
 
 router.post('/save',(req,res)=>{
