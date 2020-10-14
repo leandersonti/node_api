@@ -12,13 +12,26 @@ router.get('/api',(req,res)=>{
 
 })
 
-route.get('api/:id',(req,res)=>{
+router.get('/api/:id',(req,res)=>{
     var id = req.params.id
-    if(isNaN(id)){
+    if(!isNaN(id)){
         Job.findByPk(id)
+        .then(apiId => {
+            res.json(apiId)
+        }).catch(error => console.log("nao buscou"))
     }else{
         res.send("id invalido")
     }
+})
+
+router.delete('/api/delete/:id',(req,res)=>{
+    var id = req.params.id
+    Job.destroy({
+        where:{id}
+    })
+    .then(()=>{
+        res.redirect('/jobs/api')
+    })
 })
 
 router.post('/save',(req,res)=>{
@@ -31,7 +44,26 @@ router.post('/save',(req,res)=>{
         slug:slug(titulo),
         ano,
         valor
-    }).then(()=>res.redirect('jobs/api'))
+    }).then(()=>res.redirect('/jobs/api'))
+      .catch(error => console.log("erro ao cadastrar",error))
+})
+
+router.put('/api/update/:id',(req,res)=>{
+    // var titulo = req.body.titulo
+    // var ano = req.body.ano
+    // var valor = req.body.valor
+    let id = req.params.id
+    let {titulo,ano,valor} = req.body
+    Job.update({
+        titulo,
+        slug:slug(titulo),
+        ano,
+        valor
+    },
+        {
+            where:{id}
+        }
+    ).then(()=>res.redirect('/jobs/api'))
       .catch(error => console.log("erro ao cadastrar",error))
 })
 
