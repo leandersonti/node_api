@@ -11,6 +11,7 @@ connection.authenticate().then(() => {
 app.use(bodyparser.urlencoded({extended:false}))
 app.use(bodyparser.json())
 app.use('/jobs',require('./controller/JobController'))
+app.use('/users',require('./controller/UserController'))
 
 app.get('/', (req,res) => {
     res.send("incio api")

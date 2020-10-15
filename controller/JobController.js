@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Job = require('../models/Job')
 const slug = require('slugify')
-const { route } = require('../../painel_B/articles/ArticlesController')
+
 
 router.get('/api',(req,res)=>{
     Job.findAll()

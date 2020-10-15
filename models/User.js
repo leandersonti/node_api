@@ -1,25 +1,21 @@
 const Sequelize = require('sequelize')
 const connection = require('../database/connection')
 
-const Job = connection.define('jobs2',{
-    titulo:{
+const User = connection.define('users',{
+    nome:{
         type:Sequelize.STRING,
         allowNull:false
     },
-    slug:{
-        type:Sequelize.STRING,
-        allowNull:false
-    },
-    ano:{
+    email:{
         type:Sequelize.STRING
     },
-    valor:{
-        type:Sequelize.DOUBLE,
+    senha:{
+        type:Sequelize.STRING,
         allowNull: false
     }
 
 })
 
-//Job.sync({force:false})
+//User.sync({force:false})
 
-module.exports = Job
+module.exports = User
