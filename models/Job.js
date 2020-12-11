@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const connection = require('../database/connection')
 
-const Job = connection.define('jobs2',{
+const Job = connection.define('jobs',{
     titulo:{
         type:Sequelize.STRING,
         allowNull:false
@@ -20,6 +20,6 @@ const Job = connection.define('jobs2',{
 
 })
 
-//Job.sync({force:false})
+// Job.sync({force:false})
 
 module.exports = Job
